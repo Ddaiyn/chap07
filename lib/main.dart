@@ -16,10 +16,50 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: MyCheckBox(),
+      home: MySlider(),
     );
   }
 }
+
+class MySlider extends StatefulWidget {
+  const MySlider({super.key});
+
+  @override
+  State<MySlider> createState() => _MySliderState();
+}
+
+class _MySliderState extends State<MySlider> {
+  double _currentSliderValue = 20;
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Flutter Slider Demo'),
+        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+      ),
+      body: Center(
+        child: Column(
+          children: [
+            Slider(
+                value: _currentSliderValue,
+                min: 0,
+                max: 100,
+                //divisions: 100,
+                label: _currentSliderValue.round().toString(),
+                onChanged: (double value) {
+                  setState(() {
+                    _currentSliderValue = value;
+                  });
+                }),
+            Text('Value Selected： ${_currentSliderValue.round()}')
+          ],
+        ),
+      ),
+    );
+  }
+}
+
 
 class MyCheckBox extends StatefulWidget {
   const MyCheckBox({super.key});
